@@ -10,3 +10,12 @@ allprojects {
         mavenCentral()
     }
 }
+
+//bootJar, jar로 패키징 하지 않겠다
+bootJar{
+    enabled = false
+}
+
+jar{
+    enabled = false
+}
