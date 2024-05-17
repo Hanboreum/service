@@ -1,9 +1,11 @@
 package org.delivery.api.account;
 
 import lombok.RequiredArgsConstructor;
-import org.delivery.db.account.AccountEntity;
+import org.delivery.api.account.model.AccountMeResponse;
 import org.delivery.db.account.AccountRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/account")
@@ -13,9 +15,12 @@ public class AccountApiController {
 
     private final AccountRepository accountRepository;
 
-    @GetMapping
-    public void save(){
-        var account = AccountEntity.builder().build();
-        accountRepository.save(account);
+    @GetMapping("/me")
+    public AccountMeResponse me(){
+      return AccountMeResponse.builder()
+              .email("234@naver.com")
+              .name("name1")
+              .registeredAt(LocalDateTime.now())
+              .build();
     }
 }
