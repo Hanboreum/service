@@ -33,3 +33,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+bootJar{ //bootjar로 실행될것이기 때문에
+    enabled = true
+}
+
+jar{
+    enabled = false
+}
