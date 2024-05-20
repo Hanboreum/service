@@ -18,7 +18,7 @@ public class AccountApiController {
     private final AccountRepository accountRepository;
 
     @GetMapping("/me")
-    public Api<Object> me(){
+    public Api<AccountMeResponse> me(){
         var response = AccountMeResponse.builder()
                 .name("name1")
                 .email("234@naver.com")
@@ -26,6 +26,10 @@ public class AccountApiController {
                 .build();
 
 
-      return Api.ERROR(UserErrorCode.USER_NOT_FOUND,"사용자 없음");
+        var str = "안녕";
+        var age = 0;
+        Integer.parseInt(str);
+
+      return Api.OK(response);
     }
 }
