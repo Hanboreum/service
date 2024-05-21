@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
 
     @Id
