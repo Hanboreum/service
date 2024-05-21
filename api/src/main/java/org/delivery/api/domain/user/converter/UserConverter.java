@@ -17,9 +17,9 @@ public class UserConverter {
     //UserReguster -> UserEntity 로 변경
     public UserEntity toEntity(UserRegisterRequest request){
 
-        return Optional.ofNullable(request) //request가 있다면 맵을 통해 변환
+        return Optional.ofNullable(request)////request가 있다면 맵을 통해 변환
                 .map(it ->{
-                    //to entity
+                    // to entity
                     return UserEntity.builder()
                             .name(request.getName())
                             .email(request.getEmail())
@@ -27,27 +27,27 @@ public class UserConverter {
                             .address(request.getAddress())
                             .build();
                 })
-                .orElseThrow(() ->new ApiException(ErrorCode.NULL_POINT,"UserRegisterRequest NULL"));
+                .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT, "UserRegisterRequest Null"));
     }
 
     //entity -> response
-    public UserResponse toResponse(UserEntity userEntity) {
+        public UserResponse toResponse(UserEntity userEntity) {
 
-        return Optional.ofNullable(userEntity)
-                .map(it->{
-                    return UserResponse.builder()
-                            .id(userEntity.getId())
-                            .name(userEntity.getName())
-                            .status(userEntity.getStatus())
-                            .email(userEntity.getEmail())
-                            .address(userEntity.getAddress())
-                            .registeredAt(userEntity.getRegisteredAt())
-                            .unRegisteredAt(userEntity.getUnRegisteredAt())
-                            .lastLoginAt(userEntity.getLastLoginAt())
-                            .build();
+            return Optional.ofNullable(userEntity)
+                    .map(it ->{
+                        // to response
+                        return UserResponse.builder()
+                                .id(userEntity.getId())
+                                .name(userEntity.getName())
+                                .status(userEntity.getStatus())
+                                .email(userEntity.getEmail())
+                                .address(userEntity.getAddress())
+                                .registeredAt(userEntity.getRegisteredAt())
+                                .unRegisteredAt(userEntity.getUnRegisteredAt())
+                                .lastLoginAt(userEntity.getLastLoginAt())
+                                .build();
+                    })
+                    .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT, "UserEntity Null"));
 
-                })
-                .orElseThrow(() ->new ApiException(ErrorCode.NULL_POINT,"UserEntity NULL"));
-
-    }
+        }
 }
