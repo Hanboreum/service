@@ -11,14 +11,13 @@ import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.delivery.api.domain.user.converter.UserConverter;
 import org.delivery.api.domain.user.service.UserService;
 
-import java.util.Optional;
 
 @Business
 @RequiredArgsConstructor
 public class UserBusiness {
 
     private final UserService userService;
-    private UserConverter userConverter;
+    private final UserConverter userConverter;
 
     /**
      * 사용자에 대한 가입 처리 로직
