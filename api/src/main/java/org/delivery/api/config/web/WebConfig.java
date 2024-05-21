@@ -36,10 +36,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authorizationInterceptor) //로그인된 사용자 체크
+        registry.addInterceptor(authorizationInterceptor)
                 .excludePathPatterns(OPEN_API)
                 .excludePathPatterns(DEFAULT_EXCLUDE)
-                .excludePathPatterns(SWAGGER);
+                .excludePathPatterns(SWAGGER)
+        ;
 
     }
 

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//외부로부터 들어옴
 public class UserRegisterRequest {
 
     @NotBlank

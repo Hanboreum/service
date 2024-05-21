@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
-
+    //controller에서 요청을 받고 내려주는
     private Long id;
 
     private String name;

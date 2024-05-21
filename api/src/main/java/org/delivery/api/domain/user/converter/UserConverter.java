@@ -30,6 +30,7 @@ public class UserConverter {
                 .orElseThrow(() ->new ApiException(ErrorCode.NULL_POINT,"UserRegisterRequest NULL"));
     }
 
+    //entity -> response
     public UserResponse toResponse(UserEntity userEntity) {
 
         return Optional.ofNullable(userEntity)
