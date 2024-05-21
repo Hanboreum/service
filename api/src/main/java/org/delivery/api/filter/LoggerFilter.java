@@ -20,7 +20,7 @@ public class LoggerFilter implements Filter {
         //형변환, request, response 를 HttpServlet 으로 형변환 시켜서 넘긴다.
         var req = new ContentCachingRequestWrapper((HttpServletRequest) request);
         var res = new ContentCachingResponseWrapper((HttpServletResponse) response);
-
+        log.info("INIT URI: {}", req.getRequestURI());
         //컨트롤러, 인터셉터 등 필터 뒤에 있는 것들은 랩핑된 객체를 받는다
         chain.doFilter(req, res);
 
