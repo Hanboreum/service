@@ -1,27 +1,34 @@
 package org.delivery.api.domain.user.controller;
 
-import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
+import org.delivery.api.common.annotation.UserSession;
 import org.delivery.api.common.api.Api;
 import org.delivery.api.domain.user.business.UserBusiness;
-import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
-import org.delivery.db.user.UserRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.delivery.api.domain.user.model.User;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
+import java.util.Objects;
+
+//로그인된 사용자가 들어오는 컨트롤러
 @RequiredArgsConstructor
-@RestControllerAdvice
+@RestController
 @RequestMapping("/api/user")
 public class UserApiController {
 
     private final UserBusiness userBusiness;
 
+    @GetMapping("/me")
+    public Api<UserResponse> me(
+            @UserSession User user
+    ){
 
-
-
+        var response = userBusiness.me(user);
+        return Api.OK(response);
+    }
 }
 
 /*

@@ -11,6 +11,7 @@ import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.delivery.api.domain.user.converter.UserConverter;
+import org.delivery.api.domain.user.model.User;
 import org.delivery.api.domain.user.service.UserService;
 
 
@@ -62,5 +63,11 @@ public class UserBusiness {
         var tokenResponse = tokenBusiness.issueToken(userEntity);
 
         return tokenResponse;
+    }
+
+    public UserResponse me(User user) {
+        var userEntity = userService.getUserWithThrow(user.getId());
+        var response = userConverter.toResponse(userEntity);
+        return response;
     }
 }

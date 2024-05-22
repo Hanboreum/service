@@ -36,8 +36,8 @@ public class TokenService {
     }
 
     public Long validationToken(String token){
-        var map = tokenHelperIfs.validationTokenWithThrow(token);
-        var userId = map.get("userId");
+        var map = tokenHelperIfs.validationTokenWithThrow(token);// 검증
+        var userId = map.get("userId");//userid찾는다
 
         //userId 없을 때 예외처리
         Objects.requireNonNull(userId,()->{throw  new ApiException(ErrorCode.NULL_POINT);});
