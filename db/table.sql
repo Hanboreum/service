@@ -11,16 +11,16 @@ CREATE TABLE IF NOT EXISTS `user` (
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`store` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `store` (
+     `id` BIGINT NOT NULL AUTO_INCREMENT,
+     `name` VARCHAR(100) NOT NULL,
     `address` VARCHAR(150) NOT NULL,
-    `status` VARCHAR(45) NULL,
+    `status` VARCHAR(45) NOT NULL,
     `star` DOUBLE NULL DEFAULT 0,
+    `category` VARCHAR(45) NOT NULL,
     `thumnail_url` VARCHAR(200) NOT NULL,
-    `minium_amount` DECIMAL(11,4) NULL,
-    `minimum_delivery_amount` DECIMAL(11,4) NULL,
+    `minimum_amount` DECIMAL(11,4) NOT NULL,
+    `minimum_delivery_amount` DECIMAL(11,4) NOT NULL,
     `phone_number` VARCHAR(20) NULL,
-    `category` VARCHAR(45) NULL,
     PRIMARY KEY (`id`))
-    ENGINE = InnoDB
+    ENGINE = InnoDB;
