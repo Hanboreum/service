@@ -44,7 +44,7 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
         var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
 
 
-        // 해당 메서드에서 활용할 유저 정보를 담는다. 사용자 정보 세팅
+        // 사용자 정보 세팅. 해당 메서드에서 활용할 유저 정보를 담는다.
         //비즈니스 로직서 더 이상 헤더 참조를 해 유저 아이디 꺼내 유저가 유효한지 확인할 필요가 없다.
         return User.builder()
                 .id(userEntity.getId())
@@ -60,3 +60,6 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
 
     }
 }
+/*
+resolver 에서 인증-> controller 에서 사용자 가져옴
+ */
