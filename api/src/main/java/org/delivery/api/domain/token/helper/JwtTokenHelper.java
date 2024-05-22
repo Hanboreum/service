@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import org.delivery.api.common.error.TokenErrorCode;
 import org.delivery.api.common.exception.ApiException;
-import org.delivery.api.domain.token.ifs.TokenHelper;
+import org.delivery.api.domain.token.ifs.TokenHelperIfs;
 import org.delivery.api.domain.token.model.TokenDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 
 //JwtTokenHelper = jwt를 통해 토큰을 만든다.
-public class JwtTokenHelper implements TokenHelper {
+public class JwtTokenHelper implements TokenHelperIfs {
 
     //서명을 하기 위해선 서명을 위한 키가 필요하다
     @Value("${token.secret.key}")
