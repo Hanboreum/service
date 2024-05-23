@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `store` (
     `status` VARCHAR(45) NOT NULL,
     `star` DOUBLE NULL DEFAULT 0,
     `category` VARCHAR(45) NOT NULL,
-    `thumnail_url` VARCHAR(200) NOT NULL,
+    `thumbnailUrl` VARCHAR(200) NOT NULL,
     `minimum_amount` DECIMAL(11,4) NOT NULL,
     `minimum_delivery_amount` DECIMAL(11,4) NOT NULL,
     `phone_number` VARCHAR(20) NULL,
