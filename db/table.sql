@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `user_order` (
     `amount` DECIMAL(11,4) NOT NULL,
     `ordered_at` DATETIME NULL,
     `accepted_at` DATETIME NULL,
-    `cooking_staerted_at` DATETIME NULL,
+    `cooking_started_at` DATETIME NULL,
     `delivery_started_at` DATETIME NULL,
     `received_at` DATETIME NULL,
     PRIMARY KEY (`id`),
