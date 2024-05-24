@@ -20,8 +20,8 @@ public class StoreMenuBusiness {
     private final StoreMenuConverter storeMenuConverter;
 
     public StoreMenuResponse register(
-            StoreMenuRegisterRequest request
-    ){
+        StoreMenuRegisterRequest request
+    ) {
         // req -> entity -> save -> response
         var entity = storeMenuConverter.toEntity(request);
         var newEntity = storeMenuService.register(entity);
@@ -30,15 +30,15 @@ public class StoreMenuBusiness {
     }
 
     public List<StoreMenuResponse> search(
-            Long storeId
-    ){
+        Long storeId
+    ) {
         var list = storeMenuService.getStoreMenuByStoreId(storeId);
 
         return list.stream()
-                .map(it ->{
-                    return storeMenuConverter.toResponse(it);
-                })
-                //.map(storeMenuConverter::toResponse)
-                .collect(Collectors.toList());
+            .map(it -> {
+                return storeMenuConverter.toResponse(it);
+            })
+            //.map(storeMenuConverter::toResponse)
+            .collect(Collectors.toList());
     }
 }

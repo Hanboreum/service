@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 public class ObjectMapperConfig {
 
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         var objectMapper = new ObjectMapper();
 
         objectMapper.registerModule(new Jdk8Module()); //jdk8 버전 이후 클래스 파싱, serialize
         objectMapper.registerModule(new JavaTimeModule()); //localdate
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //모르는 json field에 대해서 무시하고 파싱
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,false);
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
         //날짜관련 직렬화
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
