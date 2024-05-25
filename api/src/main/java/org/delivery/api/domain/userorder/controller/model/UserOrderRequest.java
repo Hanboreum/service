@@ -1,4 +1,4 @@
-package org.delivery.api.domain.userorder.business.model;
+package org.delivery.api.domain.userorder.controller.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
