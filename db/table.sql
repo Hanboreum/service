@@ -67,3 +67,18 @@ CREATE TABLE IF NOT EXISTS `user_order` (
     INDEX `idx_user_id` (`user_id` ASC)
     )
     ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS`store_user` (
+     `id` BIGINT NOT NULL AUTO_INCREMENT,
+     `store_id` BIGINT NOT NULL,
+     `email` VARCHAR(100) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    `status` VARCHAR(50) NOT NULL,
+    `role` VARCHAR(50) NOT NULL,
+    `registered_at` DATETIME NULL,
+    `unregistered_at` DATETIME NULL,
+    `last_login_at` DATETIME NULL,
+    PRIMARY KEY (`id`),
+    INDEX `idx_store_id` (`store_id` ASC)
+    )
+    ENGINE = InnoDB;
