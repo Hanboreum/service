@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Business;
 import org.delivery.api.domain.storemenu.service.StoreMenuService;
 import org.delivery.api.domain.user.model.User;
-import org.delivery.api.domain.userorder.business.model.UserOrderRequest;
+import org.delivery.api.domain.userorder.controller.model.UserOrderRequest;
+import org.delivery.api.domain.userorder.controller.model.UserOrderResponse;
 import org.delivery.api.domain.userorder.converter.UserOrderConverter;
 import org.delivery.api.domain.userorder.service.UserOrderService;
 import org.delivery.api.domain.userordermenu.converter.UserOrderMenuConverter;
@@ -27,7 +28,7 @@ public class UserOrderBusiness {
     //2. userOrder 생성
     //3. userOrderMenu 생성 (주문자와 메뉴 맵핑 테이블)
     //4. 응답 생성
-    public void userOrder(User user, UserOrderRequest body) {
+    public UserOrderResponse userOrder(User user, UserOrderRequest body) {
         var storeMenuEntityList = body.getStoreMenuIdList()
             .stream()
             .map(it -> storeMenuService.getStoreMenuWithThrow(it))
@@ -53,6 +54,8 @@ public class UserOrderBusiness {
         userOrderMenuEntityList.forEach(it -> {
             userOrderMenuService.order(it);
         });
+        //response
+        return userOrderConverter.toResponse(newUserOrderEntity);
     }
 
 
