@@ -18,20 +18,21 @@ public class UserOrderMenuService {
 
     private final UserOrderMenuRepository userOrderMenuRepository;
 
-    public List<UserOrderMenuEntity> getUserOrderMenu(Long userOrderId) {
+    public List<UserOrderMenuEntity> getUserOrderMenu(Long userOrderId){
         return userOrderMenuRepository.findAllByUserOrderIdAndStatus(userOrderId, UserOrderMenuStatus.REGISTERED);
     }
 
     //생성
     public UserOrderMenuEntity order(
         UserOrderMenuEntity userOrderMenuEntity
-    ) {
+    ){
         return Optional.ofNullable(userOrderMenuEntity)
             .map(it ->{
-                it.setStatus(UserOrderStatus.REGISTERED);
+                it.setStatus(UserOrderMenuStatus.REGISTERED);
                 return userOrderMenuRepository.save(it);
             })
-            .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+            .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
+
 
 }

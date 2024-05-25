@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
 import org.delivery.db.userorder.enums.UserOrderStatus;
+import org.delivery.db.userordermenu.enums.UserOrderMenuStatus;
 import org.hibernate.internal.build.AllowNonPortable;
 
 @Data
@@ -26,5 +27,5 @@ public class UserOrderMenuEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false, columnDefinition = "varchar(50)") //
-    private UserOrderStatus status;
+    private UserOrderMenuStatus status;
 }
