@@ -6,6 +6,7 @@ import org.delivery.db.store.StoreRepository;
 import org.delivery.db.store.enums.StoreStatus;
 import org.delivery.db.storeuser.StoreUserEntity;
 import org.delivery.db.storeuser.StoreUserRepository;
+import org.delivery.storeadmin.domain.authorization.model.UserSession;
 import org.delivery.storeadmin.domain.user.controller.model.StoreUserRegisterRequest;
 import org.delivery.storeadmin.domain.user.controller.model.StoreUserResponse;
 import org.delivery.storeadmin.domain.user.service.StoreUserService;
@@ -48,6 +49,31 @@ public class StoreUserConverter {
                 StoreUserResponse.StoreResponse.builder()
                     .name(storeEntity.getName())
                     .id(storeEntity.getId())
+                    .build()
+            )
+            .build();
+
+    }
+
+    //로그인된 사용자 세션이 들어오면 반환
+    //usersession -> storeuserresponse 변환
+    public StoreUserResponse toResponse(UserSession userSession){
+
+        return StoreUserResponse.builder()
+            .user(StoreUserResponse.UserResponse.builder()
+                .id(userSession.getUserId())
+                .email(userSession.getEmail())
+                .status(userSession.getStatus())
+                .role(userSession.getRole())
+                .registeredAt(userSession.getRegisteredAt())
+                .unregisteredAt(userSession.getUnregisteredAt())
+                .lastLoginAt(userSession.getLastLoginAt())
+                .build()
+            )
+            .store(
+                StoreUserResponse.StoreResponse.builder()
+                    .name(userSession.getStoreName())
+                    .id(userSession.getStoreId())
                     .build()
             )
             .build();
