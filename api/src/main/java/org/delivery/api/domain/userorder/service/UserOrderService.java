@@ -75,7 +75,8 @@ public class UserOrderService {
             .map(it -> {
 
                 it.setStatus(UserOrderStatus.ORDER); //상태 지정
-                it.setOrderedAt(LocalDateTime.now()); //주문 시간 현재
+                it.setOrderedAt(
+                    LocalDateTime.now()); //주문 시간 현재
                 return userOrderRepository.save(it);// 저장
             })
             .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));

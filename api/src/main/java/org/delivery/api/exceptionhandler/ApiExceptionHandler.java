@@ -30,3 +30,13 @@ public class ApiExceptionHandler {
 
     }
 }
+
+
+/*
+try{
+
+}catch(Exception e){
+throw new ApiException(ErrorCode.SERVER_ERROR, e, "에러 발생")
+}
+
+ */

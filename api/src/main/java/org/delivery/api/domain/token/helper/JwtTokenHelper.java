@@ -35,7 +35,7 @@ public class JwtTokenHelper implements TokenHelperIfs {
     @Override
     public TokenDto issueAccessToken(Map<String, Object> data) {
         //만료 시간
-        var expiredLocalDateTime = LocalDateTime.now().plusHours(accessTokenPlusHour);
+        var expiredLocalDateTime = LocalDateTime.now().plusHours(accessTokenPlusHour); //토큰 만료 시간
         var expiredAt = Date.from(
                 expiredLocalDateTime.atZone(ZoneId.systemDefault()
                 ).toInstant());
