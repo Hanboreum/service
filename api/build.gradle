@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
     implementation project(':db') //api가 db를 쓰겠다
+    implementation project(':common') //common 가져다 쓸 것
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-amqp' //rabbitmq
