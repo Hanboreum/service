@@ -1,0 +1,30 @@
+plugins {
+    id 'java' //부모 버전 따라가기 때문에 버전 삭제
+}
+
+group = 'org.delivery'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
+
+jar{
+    enabled = true
+}
