@@ -13,14 +13,13 @@ public class UserOrderProducer {
     private final Producer producer;
 
     private static final String EXCHANGE = "delivery.exchange";
-    private static final String ROUTE_KEY = "delivery_key";
+    private static final String ROUTE_KEY = "delivery.key";
 
 
     //주문 보내기
-    public void sendOrder(UserOrderEntity userOrderEntity){ //사용자 주문에 해당하는 entity
+    public void sendOrder(UserOrderEntity userOrderEntity){
         sendOrder(userOrderEntity.getId());
     }
-
     public void sendOrder(Long userOrderId){
         //common class
         var message = UserOrderMessage.builder()

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class HealthOpenApiController {
 
+    //private final Producer producer;
+
     @GetMapping("/health")
     public void health(){
         log.info("health call");
+        //producer.producer("delivery.exchange", "delivery.routeKey", "hello");
     }
 }
