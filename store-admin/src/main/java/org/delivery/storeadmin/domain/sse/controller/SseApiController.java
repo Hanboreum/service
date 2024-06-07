@@ -1,5 +1,6 @@
 package org.delivery.storeadmin.domain.sse.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,8 @@ public class SseApiController {
     //emitter 를 userConnection 에 저장. 새로운 요청이 들어오면 connection 에서 꺼내 발송
     private final SseConnectionPool sseConnectionPool;
 
+    private final ObjectMapper objectMapper;
+
     @GetMapping(path = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseBodyEmitter connect(
         @Parameter(hidden = true)
@@ -38,7 +41,8 @@ public class SseApiController {
 
         var userSseConnection  = UserSseConnection.connect(
             userSession.getStoreId().toString(),
-            sseConnectionPool
+            sseConnectionPool,
+            objectMapper
         );
 
         // session 에 추가
