@@ -1,0 +1,84 @@
+package org.delivery.storeadmin.domain.sse.connection.model;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.delivery.storeadmin.domain.sse.connection.ifs.ConnectionPoolIfs;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.io.IOException;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+public class UserSseConnection {
+
+    private final String uniqueKey;
+    private final SseEmitter sseEmitter;
+    private final ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs;
+
+
+    private UserSseConnection(
+        String uniqueKey,
+        ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs
+    ) {
+        //key 초기화
+        this.uniqueKey = uniqueKey;
+
+        //sse 초기화
+        this.sseEmitter = new SseEmitter(60 * 1000L);
+
+        //callback 초기화
+        this.connectionPoolIfs = connectionPoolIfs;
+
+        // on completion
+        this.sseEmitter.onCompletion(() -> {
+            //connection pool remove
+            this.connectionPoolIfs
+                .onCompletionCallBack(this);
+        });
+
+        //on timeout
+        this.sseEmitter.onTimeout(() -> {
+            this.sseEmitter.complete();
+        });
+
+
+        //onopne 메세지
+        this.sendMessage("onopne", "connect");
+
+    }
+
+    public static UserSseConnection connect(
+        String uniqueKey,
+        ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs
+    ) {
+        return new UserSseConnection(uniqueKey, connectionPoolIfs);
+    }
+
+
+    public void sendMessage(String eventName, Object data) {
+        var event = SseEmitter.event()
+            .name(eventName)
+            .data(data);
+
+        try {
+            this.sseEmitter.send(event);
+        } catch (IOException e) {
+            this.sseEmitter.completeWithError(e);
+        }
+    }
+
+    public void sendMessage(Object data) {
+
+        var event = SseEmitter.event()
+            .data(data);
+
+        try {
+            this.sseEmitter.send(event);
+        } catch (IOException e) {
+            this.sseEmitter.completeWithError(e);
+        }
+    }
+}
