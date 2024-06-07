@@ -7,7 +7,23 @@
 <body>
 <h1>Main</h1>
 
+<!--
 <h1 th:text="${#authentication.name}"></h1> </br>
 <h1 th:text="${#authentication}"></h1> </br>
+-->
+
 </body>
+<script>
+    const url = "http://localhost:8081/api/sse/connect"; //접속 주소
+    const eventSource = new EventSource(url); //sse 연결
+
+    eventSource.onopen = event =>{
+
+        console.log("sse connection :" ); //sse 가 연결되면 이쪽으로 이벤트가 들어옴. 최초응답 받았을 때 이쪽으로 들어옴
+        console.log(event);
+    }
+    eventSource.onmessage = event =>{ //서버로부터 받은 데이터는 이쪽으로 들어옴
+        console.log("receive data : " + event.data); //메세지에 대한 응답 이쪽으로 옴
+    }
+</script>
 </html>
