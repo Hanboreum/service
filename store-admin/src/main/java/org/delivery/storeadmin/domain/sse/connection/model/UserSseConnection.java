@@ -52,7 +52,7 @@ public class UserSseConnection {
 
 
         //onopne 메세지
-        this.sendMessage("onopne", "connect");
+        this.sendMessage("onopen","connect");
 
     }
 

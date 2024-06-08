@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StoreMenuConverter {
 
     //n개가 담겨져있을 수도
-    private StoreMenuResponse toResponse(StoreMenuEntity storeMenuEntity){
+    public StoreMenuResponse toResponse(StoreMenuEntity storeMenuEntity){
         return StoreMenuResponse.builder()
             .id(storeMenuEntity.getId())
             .name(storeMenuEntity.getName())
