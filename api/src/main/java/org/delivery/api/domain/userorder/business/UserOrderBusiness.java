@@ -39,13 +39,13 @@ public class UserOrderBusiness {
     //2. userOrder 생성
     //3. userOrderMenu 생성 (주문자와 메뉴 맵핑 테이블)
     //4. 응답 생성
-    public UserOrderResponse userOrder(User user, UserOrderRequest body) {
+    public UserOrderResponse userOrder(User user,  UserOrderRequest body) {
         var storeMenuEntityList = body.getStoreMenuIdList()
             .stream()
             .map(it -> storeMenuService.getStoreMenuWithThrow(it))
             .collect(Collectors.toList());
 
-        var userOrderEntity = userOrderConverter.toEntity(user, storeMenuEntityList);
+        var userOrderEntity = userOrderConverter.toEntity(user, body.getStoreId(), storeMenuEntityList);
 
         //주문
         var newUserOrderEntity = userOrderService.order(userOrderEntity);
