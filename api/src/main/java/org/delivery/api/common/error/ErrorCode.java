@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
+@Getter //override
 @AllArgsConstructor
 public enum ErrorCode implements ErrorCodeIfs{
 
