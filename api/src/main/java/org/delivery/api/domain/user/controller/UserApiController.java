@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import java.util.Objects;
 
 //로그인된 사용자가 들어오는 컨트롤러
+//jwt token 사용
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
@@ -26,6 +27,10 @@ public class UserApiController {
             @UserSession User user
     ){
 
+       /* var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+        var userId = requestContext.getAttribute("userId",RequestAttributes.SCOPE_REQUEST);
+        var response = userBusiness.me(Long.parseLong(userId.toString()));
+*/
         var response = userBusiness.me(user);
         return Api.OK(response);
     }

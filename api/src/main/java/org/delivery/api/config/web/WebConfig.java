@@ -49,7 +49,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        //resolver 등록
+        //resolver 등록, user session 관련
         resolvers.add(userSessionResolver);
     }
 }

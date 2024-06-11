@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Converter
 @RequiredArgsConstructor
-//데이터 변환
+//데이터 변환. 순서4
 public class TokenConverter {
 
     public TokenResponse toResponse(

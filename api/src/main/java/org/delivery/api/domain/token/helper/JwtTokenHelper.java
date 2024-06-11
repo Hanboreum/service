@@ -20,6 +20,7 @@ import java.util.Map;
 @Component
 
 //JwtTokenHelper = jwt를 통해 토큰을 만든다.
+//TokenHelperIfs - JwtTokenHelper - TokenResponse - TokenBusiness
 public class JwtTokenHelper implements TokenHelperIfs {
 
     //서명을 하기 위해선 서명을 위한 키가 필요하다
@@ -44,12 +45,14 @@ public class JwtTokenHelper implements TokenHelperIfs {
         //서명키
         var key= Keys.hmacShaKeyFor(secretKey.getBytes());
 
+        //토큰 만들기
         var jwtToken = Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setClaims(data) //data setting
-                .setExpiration(expiredAt)
+                .setExpiration(expiredAt) //만료시간
                 .compact(); //생성
 
+        //토큰 return
         return TokenDto.builder()
                 .token(jwtToken)
                 .expiredAt(expiredLocalDateTime)
@@ -93,8 +96,7 @@ public class JwtTokenHelper implements TokenHelperIfs {
                 .setSigningKey(key)
                 .build();
 
-
-        try{
+        try{ // 파싱시 에러 발생
             var result =  parser.parseClaimsJws(token);
             return new HashMap<String, Object>(result.getBody());
 
