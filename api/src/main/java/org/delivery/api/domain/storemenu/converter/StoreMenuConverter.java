@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Converter
 public class StoreMenuConverter {
 
-    // response -> entity
+    // request -> entity
     public StoreMenuEntity toEntity(StoreMenuRegisterRequest request) {
 
         return Optional.ofNullable(request)

@@ -35,10 +35,13 @@ public class StoreMenuBusiness {
         var list = storeMenuService.getStoreMenuByStoreId(storeId);
 
         return list.stream()
+            .map(storeMenuConverter::toResponse)
+            .collect(Collectors.toList());
+      /*  return list.stream()
             .map(it -> {
                 return storeMenuConverter.toResponse(it);
             })
             //.map(storeMenuConverter::toResponse)
-            .collect(Collectors.toList());
+            .collect(Collectors.toList());*/
     }
 }
