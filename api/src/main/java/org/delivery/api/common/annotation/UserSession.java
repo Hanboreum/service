@@ -8,6 +8,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UserSession {
+/*
 
+var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+        var userId = requestContext.getAttribute("userId",RequestAttributes.SCOPE_REQUEST);
+        var response = userBusiness.me(Long.parseLong(userId.toString()));
+        이거 매번하기 번거로우니
+ */
 
 }

@@ -47,6 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
+    //UserSessionResolver
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         //resolver 등록, user session 관련

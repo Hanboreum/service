@@ -12,8 +12,10 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
+//request context holder 처리를 위해
 //인터셉터 -> 리졸버
 //User, UserSession, UserSessionResolver - WebConfig
+//2.
 @Component
 @RequiredArgsConstructor
 public class UserSessionResolver implements HandlerMethodArgumentResolver {
@@ -26,6 +28,7 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
 
         //1. 어노테이션 유무 체크
         var annotation = parameter.hasParameterAnnotation(UserSession.class);
+
         //2. 파라미터 타입 체크, 매개변수로 들어온 parameter 가 User class 가 맞는지 확인
         var parameterType = parameter.getParameterType().equals(User.class);
 
@@ -45,7 +48,7 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
         var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
 
 
-        //user에 entity 내용을 넣어줌
+        //user에 entity 내용을 넣어줌.
         // 사용자 정보 세팅. 해당 메서드에서 활용할 유저 정보를 담는다.
         //비즈니스 로직서 더 이상 헤더 참조를 해 유저 아이디 꺼내 유저가 유효한지 확인할 필요가 없다.
         return User.builder()
