@@ -38,7 +38,8 @@ public class UserOrderBusiness {
     //1. 사용자, 메뉴 아이디
     //2. userOrder 생성
     //3. userOrderMenu 생성 (주문자와 메뉴 맵핑 테이블)
-    //4. 응답 생성
+    //4. 데이터가 만들어지면 응답 생성
+
     public UserOrderResponse userOrder(User user,  UserOrderRequest body) {
         var storeMenuEntityList = body.getStoreMenuIdList()
             .stream()
