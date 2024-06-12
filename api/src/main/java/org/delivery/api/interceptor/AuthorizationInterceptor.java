@@ -19,6 +19,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import java.util.Objects;
 
 //클아이언트
+//web config 설정해줘야함
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -26,6 +27,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
     private final TokenBusiness tokenBusiness;
 
+    //사전 검증
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("Authorization Interceptor url : {}", request.getRequestURI());
