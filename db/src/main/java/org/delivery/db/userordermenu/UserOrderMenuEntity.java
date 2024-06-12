@@ -9,7 +9,7 @@ import org.delivery.db.BaseEntity;
 import org.delivery.db.userorder.enums.UserOrderStatus;
 import org.delivery.db.userordermenu.enums.UserOrderMenuStatus;
 import org.hibernate.internal.build.AllowNonPortable;
-
+//mapping entity
 @Data
 @NoArgsConstructor
 @AllowNonPortable
