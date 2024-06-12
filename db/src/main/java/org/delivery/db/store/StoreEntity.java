@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true) //상속관계. 동등성 검사
 @SuperBuilder
 @Table(name ="store")
 public class StoreEntity extends BaseEntity {
