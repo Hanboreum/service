@@ -14,6 +14,8 @@ import org.delivery.api.domain.user.converter.UserConverter;
 import org.delivery.api.domain.user.model.User;
 import org.delivery.api.domain.user.service.UserService;
 
+import java.util.Optional;
+
 
 @Business
 @RequiredArgsConstructor
@@ -30,21 +32,23 @@ public class UserBusiness {
      * 3. save entity -> response
      * 4. response return
      */
-    //리턴은 userResponse 로 통일 (?
+    //리턴은 userResponse 로 통일
+    //controller 에서 UserRegisterRequest 으로 받고 UserResponse 로 리턴
     public UserResponse register(UserRegisterRequest request) { //req 받고
 
         //데이터 변환
-        var entity = userConverter.toEntity(request);
-        var newEntity = userService.register(entity);
-        var response = userConverter.toResponse(newEntity);
+        //req로 받고 entity 가 저장
+       /* var entity = userConverter.toEntity(request); //req -> entity
+        var newEntity = userService.register(entity); //save
+        var response = userConverter.toResponse(newEntity); //entity -> response
         return response;
-
-       /* return Optional.ofNullable(request)
+*/
+        return Optional.ofNullable(request)
                 .map(userConverter::toEntity)
                 .map(userService::register)
                 .map(userConverter::toResponse)
                 .orElseThrow(() ->new ApiException(ErrorCode.NULL_POINT,"Request null"));
-    */
+
     }
 
     /**

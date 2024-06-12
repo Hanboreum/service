@@ -37,7 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
             "/v3/api-docs/**"
     );
 
-    @Override
+    @Override //여기는 인증 하지 않고 그냥 해줌
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authorizationInterceptor)
                 .excludePathPatterns(OPEN_API)
