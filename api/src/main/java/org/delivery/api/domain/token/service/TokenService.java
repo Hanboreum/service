@@ -20,11 +20,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TokenService {
 
-    private final TokenHelperIfs tokenHelperIfs;
+    private final TokenHelperIfs tokenHelperIfs; //interface 를 사용해 jwt or 유효 id를 사용할 수 도 있다.
 
     public TokenDto issueAccessToken(Long userId) {
         var data = new HashMap<String, Object>();
-        data.put("userId", userId);
+        data.put("userId", userId); // data 에 담아 return
         return tokenHelperIfs.issueAccessToken(data);
     }
 
