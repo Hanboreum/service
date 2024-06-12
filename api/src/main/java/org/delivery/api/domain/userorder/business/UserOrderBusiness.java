@@ -98,6 +98,7 @@ public class UserOrderBusiness {
                 //사용자가 주문한 스토어, 어디서 주문 했는지 찾아온다 TODO 리팩토링 필요
                 var storeEntity = storeService.getStoreEntityWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreId());
 
+                //주문과 메뉴, 어떠한 가게의 상품인지 내려준다.
                 return UserOrderDetailResponse.builder()
                     .userOrderResponse(userOrderConverter.toResponse(it))
                     .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
@@ -142,6 +143,7 @@ public class UserOrderBusiness {
 
         //사용자가 주문한 메뉴
         var userOrderEntityList = userOrderMenuService.getUserOrderMenu(userOrderEntity.getId());
+        //메뉴를 담고 있는 특정 가게
         var storeMenuEntityList = userOrderEntityList.stream()
             .map(userOrderMenuEntity -> {
                 var storeMenuEntity = storeMenuService.getStoreMenuWithThrow(userOrderMenuEntity.getStoreMenuId());
