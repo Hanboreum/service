@@ -21,6 +21,7 @@ public class StoreUserApiController {
     public StoreUserResponse me(
         @Parameter(hidden = true)
         @AuthenticationPrincipal UserSession userSession
+        //@AuthenticationPrincipal : UserDetail 을 상속받은 로그인한 사용자를 주입해준다.
     ) {
         return storeUserConverter.toResponse(userSession);
 
