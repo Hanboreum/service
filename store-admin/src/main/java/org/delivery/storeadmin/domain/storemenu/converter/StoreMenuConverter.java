@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 @Service
 public class StoreMenuConverter {
 
-    //n개가 담겨져있을 수도
     public StoreMenuResponse toResponse(StoreMenuEntity storeMenuEntity){
         return StoreMenuResponse.builder()
             .id(storeMenuEntity.getId())
@@ -23,6 +22,7 @@ public class StoreMenuConverter {
             .build();
     }
 
+    //n개가 담겨져있을 수도
     public List<StoreMenuResponse> toResponse(List<StoreMenuEntity> list){
         return list.stream()
             .map(it->{

@@ -2,6 +2,7 @@ package org.delivery.storeadmin.domain.sse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.delivery.storeadmin.domain.authorization.model.UserSession;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 @Slf4j
 @RequiredArgsConstructor

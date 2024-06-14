@@ -36,20 +36,19 @@ public class UserOrderBusiness {
      *  push 가 오면 user order message 를 사용해 store를 찾고 어떤 메뉴인지 정확하게 분별하기 위해 order menu 를 통해 스토어의 메뉴와 이름을 가져온다.
      *  그 다음 하나의 객체 push를 만들고 push를 사용자한테 전송하면 끝
      */
-    public void pushUserOrder(UserOrderMessage userOrderMessage){
-
+    public void pushUserOrder(UserOrderMessage userOrderMessage){// push가 오면 userOrderMessage 를 통해 store 를 찾는다.
         var userOrderEntity = userOrderService.getUserOrder(userOrderMessage.getUserOrderId()).orElseThrow(
             () -> new RuntimeException("사용자 주문 내역 없음"));
 
         //사용자 주문이 들어왔다면 user order entity
 
-        //user order menu
+        //user order entity 에서 user order menu 를 뽑는다.
         var userOrderMenuList = userOrderMenuService.getUserOrderMenuList(userOrderEntity.getId());
 
 
         //user order menu -> store menu. 데이터 변환
         var storeMenuResponseList = userOrderMenuList.stream()
-            .map(userOrderMenuEntity->{
+            .map(userOrderMenuEntity->{           //storeId 를 가지고 menuList로 바꿈
                 return storeMenuService.getStoreMenuThrow(userOrderMenuEntity.getStoreMenuId());
             })
             .map(storeMenuEntity -> {  //response 1
@@ -57,6 +56,7 @@ public class UserOrderBusiness {
             })
             .collect(Collectors.toList());
 
+        //response 어떠한 메뉴를 담았는지
         //response2. list와 user order를 response 로 변환
         var userOrderResponse = userOrderConverter.toResponse(userOrderEntity);
 
