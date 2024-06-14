@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.delivery.storeadmin.domain.sse.connection.ifs.ConnectionPoolIfs;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -12,7 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 
 @Getter
-@Setter
+//@Setter
+@ToString
 @EqualsAndHashCode
 public class UserSseConnection {
 
@@ -21,10 +23,13 @@ public class UserSseConnection {
     private final ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs;
     private final ObjectMapper objectMapper;
 
+    //UserConnection 은 사용자마자 만들어지는 객체
+    //ConnectionPool은 Bean으로 관리돼 하나만 존재하는 static 객체
+    //userConnection에서 connectionpool 을 호출 가능해야함 -> callback method 사용
     private UserSseConnection(
         String uniqueKey,
         ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs,
-        ObjectMapper objectMapper
+        ObjectMapper objectMapper //json 으로 보내기 위해
     ) {
         //key 초기화
         this.uniqueKey = uniqueKey;
@@ -35,12 +40,12 @@ public class UserSseConnection {
         //callback 초기화
         this.connectionPoolIfs = connectionPoolIfs;
 
-        //objectmapper 초기화
+        //objectmapper 초기화. json
         this.objectMapper  = objectMapper;
 
         // on completion
         this.sseEmitter.onCompletion(() -> {
-            //connection pool remove
+            //connection pool 에서 지워주기
             this.connectionPoolIfs
                 .onCompletionCallBack(this);
         });
@@ -78,7 +83,6 @@ public class UserSseConnection {
             this.sseEmitter.completeWithError(e);
         }
     }
-
 
     public void sendMessage(Object data) {
 

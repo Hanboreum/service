@@ -31,7 +31,7 @@ public class SseApiController {
 
     private final ObjectMapper objectMapper;
 
-    @GetMapping(path = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(path = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE) // sse session을 받기 위한 설정
     public ResponseBodyEmitter connect(
         @Parameter(hidden = true)
         @AuthenticationPrincipal UserSession userSession
