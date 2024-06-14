@@ -67,7 +67,7 @@ public class UserOrderBusiness {
             userOrderMenuService.order(it);
         });
 
-        //비동기로 가맹점에 주문 알리기 (만들어둔것과 연결)
+        //rabbit mq 비동기로 가맹점에 주문 알리기 (만들어둔것과 연결)
         userOrderProducer.sendOrder(newUserOrderEntity);
 
         //response

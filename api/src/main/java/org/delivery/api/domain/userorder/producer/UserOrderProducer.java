@@ -5,7 +5,7 @@ import org.delivery.api.common.rabbitmq.Producer;
 import org.delivery.common.message.model.UserOrderMessage;
 import org.delivery.db.userorder.UserOrderEntity;
 import org.springframework.stereotype.Service;
-
+//rabbitmq 주문하기
 @Service
 @RequiredArgsConstructor
 public class UserOrderProducer {
