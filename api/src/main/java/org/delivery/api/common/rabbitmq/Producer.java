@@ -3,7 +3,7 @@ package org.delivery.api.common.rabbitmq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
-
+//rabbit template 을 사용해 보내준다.
 @RequiredArgsConstructor
 @Component
 public class Producer {

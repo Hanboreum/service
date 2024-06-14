@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/open-api")
 @Slf4j
 public class HealthOpenApiController {
-
+//rabbitmq test controller
     //private final Producer producer;
 
     @GetMapping("/health")
     public void health(){
         log.info("health call");
-        //producer.producer("delivery.exchange", "delivery.routeKey", "hello");
+        //producer.producer("delivery.exchange", "delivery.key", "hello");
     }
 }

@@ -22,13 +22,13 @@ public class RabbitMqConfig {
         return new DirectExchange("delivery.exchange");
     }
 
-    @Bean
+    @Bean // exchange 가 q를 라우팅 해줘야함
     public Queue queue() { //queue
         return new Queue("delivery.queue");
     }
 
 
-    @Bean //exchange와 queue가 바인딩이 되도록 설정해줌
+    @Bean //exchange와 queue를 연결 시키는 설정
     public Binding binding(DirectExchange directExchange, Queue queue) {
         return BindingBuilder.bind(queue).to(directExchange).with("delivery.key");
 
@@ -43,7 +43,7 @@ public class RabbitMqConfig {
                                           MessageConverter messageConverter
     ) {
         var rabbitTemplate = new RabbitTemplate(connectionFactory); //connectionfactory로 부터 rabbit template만든다
-        rabbitTemplate.setMessageConverter(messageConverter);
+        rabbitTemplate.setMessageConverter(messageConverter); //messageConverter 지정
         return rabbitTemplate;
     }
 
