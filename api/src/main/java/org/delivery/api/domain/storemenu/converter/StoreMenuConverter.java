@@ -3,7 +3,6 @@ package org.delivery.api.domain.storemenu.converter;
 import org.delivery.api.common.annotation.Converter;
 import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.exception.ApiException;
-import org.delivery.api.domain.store.controller.model.StoreRegisterRequest;
 import org.delivery.api.domain.storemenu.controller.model.StoreMenuRegisterRequest;
 import org.delivery.api.domain.storemenu.controller.model.StoreMenuResponse;
 import org.delivery.db.storemenu.StoreMenuEntity;
