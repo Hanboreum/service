@@ -15,18 +15,18 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(value = ApiException.class)
     public ResponseEntity<Api<Object>> apiException(
-            ApiException apiException
-    ){
+        ApiException apiException
+    ) {
         log.error("", apiException);
 
         var errorCode = apiException.getErrorCodeIfs();
 
         return ResponseEntity
-                .status(errorCode.getHttpStatusCode())
-                .body(
-                        Api.ERROR(errorCode, apiException.getErrorDescription())
+            .status(errorCode.getHttpStatusCode())
+            .body(
+                Api.ERROR(errorCode, apiException.getErrorDescription())
 
-                );
+            );
 
     }
 }

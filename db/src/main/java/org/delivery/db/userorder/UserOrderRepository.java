@@ -13,6 +13,7 @@ public interface UserOrderRepository extends JpaRepository<UserOrderEntity, Long
     List<UserOrderEntity> findAllByUserIdAndStatusOrderByIdDesc(Long userId, UserOrderStatus status);
 
     //select * from user_order where user_id=[] and status in (?,?,? ...) order by id desc;
+    //여러개 select ?
     List<UserOrderEntity> findAllByUserIdAndStatusInOrderByIdDesc(Long userId, List<UserOrderStatus> status);
 
     //특정 주문, 특정 id를 찍고 들어왔을 때 해당 주문이 유효한지, 특정 유저의 것이 맞는지

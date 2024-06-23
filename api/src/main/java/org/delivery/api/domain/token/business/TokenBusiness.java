@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Business
 @RequiredArgsConstructor
-//토큰 발행
+//토큰 발행. 순서 4
 public class TokenBusiness {
 
     private final TokenService tokenService;
@@ -23,7 +23,7 @@ public class TokenBusiness {
      * 1. user entity -user id추출
      * 2. access, refreash token 발행
      * 3. converter -> token response 로 변경
-     * token response를 만든ㄷ다.
+     * token response 를 만든ㄷ다.
      */
     public TokenResponse issueToken(UserEntity userEntity){
         return Optional.ofNullable(userEntity)

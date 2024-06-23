@@ -19,6 +19,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import java.util.Objects;
 
 //클아이언트
+//web config 설정해줘야함
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -26,6 +27,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
     private final TokenBusiness tokenBusiness;
 
+    //사전 검증
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("Authorization Interceptor url : {}", request.getRequestURI());
@@ -40,6 +42,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        //1.
         //인터셉터가 첫번째로 인증 처리.
         //토큰이 들어오면 authorization-token 여기서 꺼낸다
         var accessToken = request.getHeader("authorization-token");
@@ -47,12 +50,12 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             throw new ApiException(TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND);
         }
 
-        //토큰이 있다면 있다면 validation
+        //토큰이 있다면 있다면 validation, userid 가져온다.
         var userId = tokenBusiness.validationAccessToken(accessToken);
 
 
-        if(userId != null){  //요청 scope에 userId 넣는다. 여기까지가 인터셉터 역할
-            //저장
+        if(userId != null){  //요청 scope에 userId 넣는다. 여기까지가 인터셉터 역할 -> userApiController 로 이동
+            //requestContext 에 SCOPE_REQUEST = 이번 요청 동안만 저장
             var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
             requestContext.setAttribute("userId", userId, RequestAttributes.SCOPE_REQUEST);//리퀘스트 단위로 저장
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
 
-    //유효한 스토어, id+ status
+    //특정 유효한 스토어, id+ status
     //select *  store where id =[] and status ='REGISTERED' order by id desc limit 1;
     Optional<StoreEntity> findFirstByIdAndStatusOrderByIdDesc(Long id, StoreStatus status);
 

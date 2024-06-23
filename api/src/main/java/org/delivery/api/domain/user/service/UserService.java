@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * user domain login 처리하는 서비스
+ * user domain login 만 처리하는 서비스
  */
 @Service
 @RequiredArgsConstructor

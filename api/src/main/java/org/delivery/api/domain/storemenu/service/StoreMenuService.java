@@ -23,6 +23,7 @@ public class StoreMenuService {
         return entity.orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
     }
 
+    //특정 store 의 menu
     public List<StoreMenuEntity> getStoreMenuByStoreId(Long storeId){
         return storeMenuRepository.findAllByStoreIdAndStatusOrderBySequenceDesc(storeId, StoreMenuStatus.REGISTERED);
     }

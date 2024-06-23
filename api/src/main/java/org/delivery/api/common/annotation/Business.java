@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Service
+@Service //이 덕분에 custom Business annotation 이 빈으로 등록됨
 public @interface Business {
 
     @AliasFor(annotation = Service.class)

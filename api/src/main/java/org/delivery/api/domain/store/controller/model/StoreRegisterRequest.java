@@ -19,7 +19,7 @@ public class StoreRegisterRequest {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotBlank //문자열
     private String address;
 
     @NotNull //enum
@@ -28,7 +28,7 @@ public class StoreRegisterRequest {
     @NotBlank
     private String thumbnailUrl;
 
-    @NotNull
+    @NotNull //BigDecimal
     private BigDecimal minimumAmount;
 
     @NotNull
@@ -36,6 +36,4 @@ public class StoreRegisterRequest {
 
     @NotBlank
     private String phoneNumber;
-
-
 }

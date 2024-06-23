@@ -26,7 +26,7 @@ public class UserOrderMenuService {
     public UserOrderMenuEntity order(
         UserOrderMenuEntity userOrderMenuEntity
     ){
-        return Optional.ofNullable(userOrderMenuEntity)
+       return Optional.ofNullable(userOrderMenuEntity)
             .map(it ->{
                 it.setStatus(UserOrderMenuStatus.REGISTERED);
                 return userOrderMenuRepository.save(it);

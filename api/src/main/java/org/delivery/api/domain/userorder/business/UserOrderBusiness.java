@@ -11,6 +11,7 @@ import org.delivery.api.domain.userorder.controller.model.UserOrderDetailRespons
 import org.delivery.api.domain.userorder.controller.model.UserOrderRequest;
 import org.delivery.api.domain.userorder.controller.model.UserOrderResponse;
 import org.delivery.api.domain.userorder.converter.UserOrderConverter;
+import org.delivery.api.domain.userorder.producer.UserOrderProducer;
 import org.delivery.api.domain.userorder.service.UserOrderService;
 import org.delivery.api.domain.userordermenu.converter.UserOrderMenuConverter;
 import org.delivery.api.domain.userordermenu.service.UserOrderMenuService;
@@ -32,18 +33,20 @@ public class UserOrderBusiness {
     private final StoreService storeService;
     private final StoreMenuConverter storeMenuConverter;
     private final StoreConverter storeConverter;
+    private final UserOrderProducer userOrderProducer;
 
     //1. 사용자, 메뉴 아이디
     //2. userOrder 생성
     //3. userOrderMenu 생성 (주문자와 메뉴 맵핑 테이블)
-    //4. 응답 생성
-    public UserOrderResponse userOrder(User user, UserOrderRequest body) {
+    //4. 데이터가 만들어지면 응답 생성
+
+    public UserOrderResponse userOrder(User user,  UserOrderRequest body) {
         var storeMenuEntityList = body.getStoreMenuIdList()
             .stream()
             .map(it -> storeMenuService.getStoreMenuWithThrow(it))
             .collect(Collectors.toList());
 
-        var userOrderEntity = userOrderConverter.toEntity(user, storeMenuEntityList);
+        var userOrderEntity = userOrderConverter.toEntity(user, body.getStoreId(), storeMenuEntityList);
 
         //주문
         var newUserOrderEntity = userOrderService.order(userOrderEntity);
@@ -59,10 +62,14 @@ public class UserOrderBusiness {
             })
             .collect(Collectors.toList());
 
-        //주문 내역 남기기
+        //주문 내역 기록 남기기
         userOrderMenuEntityList.forEach(it -> {
             userOrderMenuService.order(it);
         });
+
+        //rabbit mq 비동기로 가맹점에 주문 알리기 (만들어둔것과 연결)
+        userOrderProducer.sendOrder(newUserOrderEntity);
+
         //response
         return userOrderConverter.toResponse(newUserOrderEntity);
     }
@@ -91,6 +98,7 @@ public class UserOrderBusiness {
                 //사용자가 주문한 스토어, 어디서 주문 했는지 찾아온다 TODO 리팩토링 필요
                 var storeEntity = storeService.getStoreEntityWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreId());
 
+                //주문과 메뉴, 어떠한 가게의 상품인지 내려준다.
                 return UserOrderDetailResponse.builder()
                     .userOrderResponse(userOrderConverter.toResponse(it))
                     .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
@@ -135,6 +143,7 @@ public class UserOrderBusiness {
 
         //사용자가 주문한 메뉴
         var userOrderEntityList = userOrderMenuService.getUserOrderMenu(userOrderEntity.getId());
+        //메뉴를 담고 있는 특정 가게
         var storeMenuEntityList = userOrderEntityList.stream()
             .map(userOrderMenuEntity -> {
                 var storeMenuEntity = storeMenuService.getStoreMenuWithThrow(userOrderMenuEntity.getStoreMenuId());

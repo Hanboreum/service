@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
+//token 순서 중 3
 @Data
 @Builder
 @AllArgsConstructor

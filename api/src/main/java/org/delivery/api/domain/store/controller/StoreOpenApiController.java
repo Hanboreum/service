@@ -23,7 +23,7 @@ public class StoreOpenApiController {
             @Valid
             @RequestBody Api<StoreRegisterRequest> request
             ){
-        var reponse = storeBusiness.register(request.getBody());
-        return Api.OK(reponse);
+        var response =  storeBusiness.register(request.getBody());
+        return Api.OK(response);
     }
 }

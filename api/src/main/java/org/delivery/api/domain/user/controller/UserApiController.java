@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import java.util.Objects;
 
 //로그인된 사용자가 들어오는 컨트롤러
+//jwt token 사용
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
@@ -26,6 +27,13 @@ public class UserApiController {
             @UserSession User user
     ){
 
+       /* AuthorizationInterceptor 에서 넘어옴
+       requestContext = 하나의 request 가 들아올 때 마다 생성
+       이 코드를 business 에서 수행할 수도 있지만 매번 하는건 번거롭 -> @UserSession 생성
+       var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+        var userId = requestContext.getAttribute("userId",RequestAttributes.SCOPE_REQUEST);
+        var response = userBusiness.me(Long.parseLong(userId.toString()));
+*/
         var response = userBusiness.me(user);
         return Api.OK(response);
     }

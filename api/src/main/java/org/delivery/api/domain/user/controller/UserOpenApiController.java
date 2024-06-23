@@ -31,7 +31,7 @@ public class UserOpenApiController {
 
     //로그인
     @PostMapping("/login")
-    public Api<TokenResponse> login (
+    public Api<TokenResponse> login ( //login 시 token 발행
             @Valid
             @RequestBody Api<UserLoginRequest> request
     ){

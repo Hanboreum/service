@@ -21,7 +21,7 @@ public class StoreApiController {
 
     @GetMapping("/search")
     public Api<List<StoreResponse>> search(
-            @RequestParam(required = false)
+            @RequestParam(required = false) //필수갑 아님
             StoreCategory storeCategory
     ){
         var response = storeBusiness.searchCategory(storeCategory);

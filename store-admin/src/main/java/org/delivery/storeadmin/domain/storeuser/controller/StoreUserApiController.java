@@ -1,10 +1,10 @@
-package org.delivery.storeadmin.domain.user.controller;
+package org.delivery.storeadmin.domain.storeuser.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.delivery.storeadmin.domain.authorization.model.UserSession;
-import org.delivery.storeadmin.domain.user.controller.model.StoreUserResponse;
-import org.delivery.storeadmin.domain.user.converter.StoreUserConverter;
+import org.delivery.storeadmin.domain.storeuser.controller.model.StoreUserResponse;
+import org.delivery.storeadmin.domain.storeuser.converter.StoreUserConverter;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,7 @@ public class StoreUserApiController {
     public StoreUserResponse me(
         @Parameter(hidden = true)
         @AuthenticationPrincipal UserSession userSession
+        //@AuthenticationPrincipal : UserDetail 을 상속받은 로그인한 사용자를 주입해준다.
     ) {
         return storeUserConverter.toResponse(userSession);
 

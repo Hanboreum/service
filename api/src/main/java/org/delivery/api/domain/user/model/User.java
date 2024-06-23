@@ -8,6 +8,7 @@ import org.delivery.db.user.enums.UserStatus;
 
 import java.time.LocalDateTime;
 //UserSession annotation
+//request context holder 간편 처리를 위해
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
