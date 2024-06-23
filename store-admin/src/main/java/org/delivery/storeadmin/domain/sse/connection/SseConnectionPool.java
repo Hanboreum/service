@@ -26,7 +26,6 @@ public class SseConnectionPool implements ConnectionPoolIfs<String, UserSseConne
         return connectionPool.get(uniqueKey);
     }
 
-
     //userConnection에서 connectionpool 을 호출 가능해야함 -> callback method 사용
     @Override
     public void onCompletionCallBack(UserSseConnection session) {

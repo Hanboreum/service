@@ -21,6 +21,7 @@ public class UserSseConnection {
     private final String uniqueKey;
     private final SseEmitter sseEmitter;
     private final ConnectionPoolIfs<String, UserSseConnection> connectionPoolIfs;
+
     private final ObjectMapper objectMapper;
 
     //UserConnection 은 사용자마자 만들어지는 객체
@@ -41,7 +42,7 @@ public class UserSseConnection {
         this.connectionPoolIfs = connectionPoolIfs;
 
         //objectmapper 초기화. json
-        this.objectMapper  = objectMapper;
+        this.objectMapper = objectMapper;
 
         // on completion
         this.sseEmitter.onCompletion(() -> {
@@ -57,7 +58,7 @@ public class UserSseConnection {
 
 
         //onopne 메세지
-        this.sendMessage("onopen","connect");
+        this.sendMessage("onopen", "connect");
 
     }
 
@@ -70,7 +71,7 @@ public class UserSseConnection {
     }
 
 
-    public void sendMessage(String eventName, Object data)  {
+    public void sendMessage(String eventName, Object data) {
 
         try {
             var json = this.objectMapper.writeValueAsString(data);
@@ -85,13 +86,11 @@ public class UserSseConnection {
     }
 
     public void sendMessage(Object data) {
-
         try {
             var json = this.objectMapper.writeValueAsString(data);
 
             var event = SseEmitter.event()
                 .data(json);
-
             this.sseEmitter.send(event);
         } catch (IOException e) {
             this.sseEmitter.completeWithError(e);

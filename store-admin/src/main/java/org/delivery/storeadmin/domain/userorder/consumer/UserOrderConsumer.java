@@ -16,12 +16,11 @@ public class UserOrderConsumer {
 
     private final UserOrderBusiness userOrderBusiness;
 
-    @RabbitListener(queues = "delivery.queue")//delivery.queue 로부터 받아온다
+    @RabbitListener(queues = "delivery.queue")
     public void userOrderConsumer(
         UserOrderMessage userOrderMessage
-    ) {
-
-        log.info("message queue >> : {}", userOrderMessage);
+    ){
+        log.info("message queue >> {}", userOrderMessage);
         userOrderBusiness.pushUserOrder(userOrderMessage);
     }
 }

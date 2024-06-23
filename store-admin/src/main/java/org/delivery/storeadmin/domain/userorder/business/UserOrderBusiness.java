@@ -37,14 +37,13 @@ public class UserOrderBusiness {
      *  그 다음 하나의 객체 push를 만들고 push를 사용자한테 전송하면 끝
      */
     public void pushUserOrder(UserOrderMessage userOrderMessage){// push가 오면 userOrderMessage 를 통해 store 를 찾는다.
-        var userOrderEntity = userOrderService.getUserOrder(userOrderMessage.getUserOrderId()).orElseThrow(
-            () -> new RuntimeException("사용자 주문 내역 없음"));
+        var userOrderEntity = userOrderService.getUserOrder(userOrderMessage.getUserOrderId())
+            .orElseThrow(()-> new RuntimeException("사용자 주문내역 없음"));
 
         //사용자 주문이 들어왔다면 user order entity
 
         //user order entity 에서 user order menu 를 뽑는다.
         var userOrderMenuList = userOrderMenuService.getUserOrderMenuList(userOrderEntity.getId());
-
 
         //user order menu -> store menu. 데이터 변환
         var storeMenuResponseList = userOrderMenuList.stream()
@@ -64,7 +63,8 @@ public class UserOrderBusiness {
         var push = UserOrderDetailResponse.builder()
             .userOrderResponse(userOrderResponse)
             .storeMenuResponseList(storeMenuResponseList)
-            .build();
+            .build()
+            ;
 
 
         //사용자 주문 찾았으면 올바른 데이터 형태 만들기

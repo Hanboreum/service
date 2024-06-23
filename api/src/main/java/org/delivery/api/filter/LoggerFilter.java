@@ -71,6 +71,7 @@ public class LoggerFilter implements Filter {
 
         //이거 없으면 res body가 없이 간다
         res.copyBodyToResponse();
+
     }
 
 }

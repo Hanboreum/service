@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter //override
+@Getter
 @AllArgsConstructor
 public enum ErrorCode implements ErrorCodeIfs{
 
@@ -16,7 +16,6 @@ public enum ErrorCode implements ErrorCodeIfs{
     NULL_POINT(HttpStatus.INTERNAL_SERVER_ERROR.value(), 512, "Null point")
 
     ;
-
     private final Integer httpStatusCode;
     private final Integer errorCode;
     private final String description;
